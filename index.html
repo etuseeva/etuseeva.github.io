@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кардиологический калькулятор фаз изгнания</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Определение функционального состояния миокарда левого желудочка</h1>
+            <p class="subtitle">Способ оценки сердечной функции по длительности фаз быстрого и медленного изгнания</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab(event, 'calculator')">Калькулятор</button>
+            <button class="tab-button" onclick="openTab(event, 'examples')">Примеры</button>
+            <button class="tab-button" onclick="openTab(event, 'article')">Научная статья</button>
+            <button class="tab-button" onclick="openTab(event, 'help')">Справка</button>
+        </div>
+
+        <!-- Калькулятор -->
+        <div id="calculator" class="tab-content active">
+            <div class="calculator-section">
+                <h2>Введите данные фаз сердечного цикла</h2>
+                <p class="instruction">Введите длительность каждой фазы в секундах (например, 0.05)</p>
+                
+                <div class="input-group">
+                    <label for="ac_input">
+                        <span class="label-text">AC - Асинхронное сокращение:</span>
+                        <span class="label-help">Длительность фазы асинхронного сокращения</span>
+                    </label>
+                    <input type="number" id="ac_input" step="0.001" placeholder="0.050">
+                </div>
+
+                <div class="input-group">
+                    <label for="ic_input">
+                        <span class="label-text">IC - Изометрическое сокращение:</span>
+                        <span class="label-help">Длительность фазы изометрического сокращения</span>
+                    </label>
+                    <input type="number" id="ic_input" step="0.001" placeholder="0.040">
+                </div>
+
+                <div class="input-group">
+                    <label for="em_input">
+                        <span class="label-text">Em - Быстрое изгнание:</span>
+                        <span class="label-help">Длительность фазы быстрого изгнания</span>
+                    </label>
+                    <input type="number" id="em_input" step="0.001" placeholder="0.120">
+                </div>
+
+                <div class="input-group">
+                    <label for="er_input">
+                        <span class="label-text">Er - Медленное изгнание:</span>
+                        <span class="label-help">Длительность фазы медленного изгнания</span>
+                    </label>
+                    <input type="number" id="er_input" step="0.001" placeholder="0.080">
+                </div>
+
+                <button id="calculate_button" class="calculate-btn">Рассчитать</button>
+                <button id="clear_button" class="clear-btn">Очистить</button>
+            </div>
+
+            <div id="results_section" class="results-section" style="display: none;">
+                <h2>Результаты расчета</h2>
+                
+                <div class="intermediate-calculations">
+                    <h3>Промежуточные вычисления:</h3>
+                    <div id="intermediate_results"></div>
+                </div>
+
+                <div class="final-results">
+                    <h3>Итоговые результаты:</h3>
+                    <div id="final_results"></div>
+                </div>
+
+                <div class="interpretation">
+                    <h3>Интерпретация результатов:</h3>
+                    <div id="interpretation_results"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Примеры -->
+        <div id="examples" class="tab-content">
+            <h2>Примеры расчетов</h2>
+            
+            <div class="example-card">
+                <h3>Пример 1: Здоровый пациент</h3>
+                <div class="example-data">
+                    <p><strong>Входные данные:</strong></p>
+                    <ul>
+                        <li>AC = 0.050 сек</li>
+                        <li>IC = 0.040 сек</li>
+                        <li>Em = 0.120 сек</li>
+                        <li>Er = 0.080 сек</li>
+                    </ul>
+                    <button onclick="loadExample(0.050, 0.040, 0.120, 0.080)" class="example-btn">Загрузить пример</button>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <h3>Пример 2: Гипертоническая болезнь</h3>
+                <div class="example-data">
+                    <p><strong>Входные данные:</strong></p>
+                    <ul>
+                        <li>AC = 0.055 сек</li>
+                        <li>IC = 0.045 сек</li>
+                        <li>Em = 0.110 сек</li>
+                        <li>Er = 0.090 сек</li>
+                    </ul>
+                    <button onclick="loadExample(0.055, 0.045, 0.110, 0.090)" class="example-btn">Загрузить пример</button>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <h3>Пример 3: Патология миокарда</h3>
+                <div class="example-data">
+                    <p><strong>Входные данные:</strong></p>
+                    <ul>
+                        <li>AC = 0.060 сек</li>
+                        <li>IC = 0.050 сек</li>
+                        <li>Em = 0.100 сек</li>
+                        <li>Er = 0.100 сек</li>
+                    </ul>
+                    <button onclick="loadExample(0.060, 0.050, 0.100, 0.100)" class="example-btn">Загрузить пример</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Научная статья -->
+        <div id="article" class="tab-content">
+            <h2>Научное обоснование метода</h2>
+            <div class="article-content">
+                <h3>Способ определения функционального состояния миокарда левого желудочка</h3>
+                
+                <p>Изобретение относится к медицине, а именно к способам диагностики сердечно-сосудистых заболеваний.</p>
+                
+                <p>Известен способ определения функционального состояния миокарда левого желудочка сердца путем измерения объема сердца по длительностям фаз быстрого и медленного изгнания.</p>
+
+                <h4>Формула изобретения:</h4>
+                <div class="formula-box">
+                    <p><strong>Q₁ = 100 · F(AC, IC, Em, Er)</strong></p>
+                    <p>где Q₁ - объем крови, изгоняемый из левого желудочка сердца в фазу быстрого изгнания, выраженный в процентах от систолического объема</p>
+                </div>
+
+                <h4>Расчетные формулы:</h4>
+                <div class="formula-details">
+                    <p><strong>Q₂ = 100 - Q₁</strong></p>
+                    <p>где Q₂ - объем крови, изгоняемый из левого желудочка сердца в фазу медленного изгнания</p>
+                    
+                    <p><strong>Коэффициент изгнания:</strong></p>
+                    <p>E = (1 + Em/Er)^(1/5)</p>
+                    
+                    <p><strong>Нормальные значения:</strong></p>
+                    <ul>
+                        <li>Здоровые: Q₁ = 67%, Q₂ = 33%</li>
+                        <li>Гипертония: Q₁ = 65%, Q₂ = 35%</li>
+                    </ul>
+                </div>
+
+                <h4>Клиническое значение:</h4>
+                <p>Функциональное состояние миокарда левого желудочка сердца определяется по соотношению рассчитанных объемов крови.</p>
+                
+                <div class="reference">
+                    <p><strong>Источники информации:</strong></p>
+                    <p>1. С.Б. "Методы исследования кровообращения". Л., "Наука", 1976, с. 83.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Справка -->
+        <div id="help" class="tab-content">
+            <h2>Справка по использованию</h2>
+            
+            <div class="help-section">
+                <h3>Как пользоваться калькулятором:</h3>
+                <ol>
+                    <li>Введите значения длительности фаз сердечного цикла в секундах</li>
+                    <li>Нажмите кнопку "Рассчитать"</li>
+                    <li>Изучите промежуточные и итоговые результаты</li>
+                    <li>Ознакомьтесь с интерпретацией результатов</li>
+                </ol>
+            </div>
+
+            <div class="help-section">
+                <h3>Описание фаз сердечного цикла:</h3>
+                <dl>
+                    <dt>AC (Асинхронное сокращение)</dt>
+                    <dd>Длительность фазы асинхронного сокращения миокарда</dd>
+                    
+                    <dt>IC (Изометрическое сокращение)</dt>
+                    <dd>Длительность фазы изометрического сокращения</dd>
+                    
+                    <dt>Em (Быстрое изгнание)</dt>
+                    <dd>Длительность фазы быстрого изгнания крови</dd>
+                    
+                    <dt>Er (Медленное изгнание)</dt>
+                    <dd>Длительность фазы медленного изгнания крови</dd>
+                </dl>
+            </div>
+
+            <div class="help-section">
+                <h3>Интерпретация результатов:</h3>
+                <table class="interpretation-table">
+                    <thead>
+                        <tr>
+                            <th>Состояние</th>
+                            <th>Q₁ (%)</th>
+                            <th>Q₂ (%)</th>
+                            <th>Характеристика</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Норма</td>
+                            <td>65-70</td>
+                            <td>30-35</td>
+                            <td>Нормальная функция миокарда</td>
+                        </tr>
+                        <tr>
+                            <td>Гипертония</td>
+                            <td>60-65</td>
+                            <td>35-40</td>
+                            <td>Умеренные нарушения</td>
+                        </tr>
+                        <tr>
+                            <td>Патология</td>
+                            <td>&lt;60</td>
+                            <td>&gt;40</td>
+                            <td>Значительные нарушения функции</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="calculator.js"></script>
+</body>
+</html> 
