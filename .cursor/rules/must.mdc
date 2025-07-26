@@ -11,7 +11,8 @@ alwaysApply: true
 - use const if needed
 - formulas should looks pretty (like in latex)
 - be responsive / adaptive (support mobile)
-- Break down the UI into smaller, single-responsibility components within the page's `components` directory:
+- Break down the UI into smaller, single-responsibility components
+- page structure:
 pages/
 └── [PageName]/
     ├── components/

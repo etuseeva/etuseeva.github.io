@@ -1,10 +1,11 @@
-import { useState } from 'react'
-import './App.css'
+import React from 'react';
 
-function App() {
-  return (
-    <div/>
-  )
-}
+import MainLayout from './layouts/MainLayout';
+import { MainPage } from './pages/Main';
+import './App.css';
 
-export default App
+const App: React.FC = () => {
+  return <MainLayout><MainPage /></MainLayout>;
+};
+
+export default App;
