@@ -65,7 +65,7 @@ const ArticleTab: React.FC = () => {
             ]}
             renderItem={item => (
               <List.Item>
-                <Text strong>{item.title}</Text> - {item.description}
+                <Text>• </Text><Text strong>{item.title}</Text> - {item.description}
               </List.Item>
             )}
           />
@@ -82,7 +82,7 @@ const ArticleTab: React.FC = () => {
               'Ограниченная информативность существующих методов диагностики',
               'Недостаточный учет временных характеристик сердечного цикла'
             ]}
-            renderItem={item => <List.Item>{item}</List.Item>}
+            renderItem={(item, index) => <List.Item><Text>• </Text>{item}</List.Item>}
           />
         </div>
 
@@ -105,9 +105,9 @@ const ArticleTab: React.FC = () => {
               { title: 'Количественная оценка', description: 'определение процентного соотношения объемов крови' },
               { title: 'Неинвазивность', description: 'измерения проводятся без хирургического вмешательства' }
             ]}
-            renderItem={item => (
+            renderItem={(item, index) => (
               <List.Item>
-                <Text strong>{item.title}</Text> - {item.description}
+                <Text>• </Text><Text strong>{item.title}</Text> - {item.description}
               </List.Item>
             )}
           />
@@ -202,7 +202,7 @@ const ArticleTab: React.FC = () => {
             ]}
             renderItem={(item, index) => (
               <List.Item>
-                {index + 1}. <Text strong>{item.title}</Text> - {item.description}
+                <Text>{index + 1}. </Text><Text strong>{item.title}</Text> - {item.description}
               </List.Item>
             )}
           />
@@ -222,9 +222,9 @@ const ArticleTab: React.FC = () => {
               { title: 'Прогнозирование', description: 'оценка риска развития сердечно-сосудистых осложнений' },
               { title: 'Дифференциальная диагностика', description: 'различение типов сердечной патологии' }
             ]}
-            renderItem={item => (
+            renderItem={(item, index) => (
               <List.Item>
-                <Text strong>{item.title}</Text> - {item.description}
+                <Text>• </Text><Text strong>{item.title}</Text> - {item.description}
               </List.Item>
             )}
           />
