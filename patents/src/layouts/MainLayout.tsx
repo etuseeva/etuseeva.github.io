@@ -10,10 +10,10 @@ interface MainLayoutProps {
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
     <div className="absolute top-0 left-0 right-0 bottom-0 w-full h-full p-8">
-        <Title level={1} className="mb-8">
-          Posts
-        </Title>
-        {children}
+      <Title level={1} className="mb-8">
+        Архив Патентов СССР
+      </Title>
+      {children}
     </div>
   );
 };

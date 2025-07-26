@@ -1,22 +1,30 @@
 import React from 'react';
-import { Card, Tag, Typography } from 'antd';
+import { Card, Typography } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
-const { Title, Text } = Typography;
+const { Text } = Typography;
 
 interface PostCardProps {
   title: string;
   description: string;
+  onClick?: () => void;
 }
 
 const PostCard: React.FC<PostCardProps> = ({ 
   title, 
-  description, 
+  description,
+  onClick
 }) => {
   return (
-    <Card title={title}>
-          <Text type="secondary">
-            {description}
-          </Text>
+    <Card 
+      title={title}
+      hoverable
+      onClick={onClick}
+      className="cursor-pointer transition-all duration-200 hover:shadow-lg"
+    >
+      <Text type="secondary">
+        {description}
+      </Text>
     </Card>
   );
 };

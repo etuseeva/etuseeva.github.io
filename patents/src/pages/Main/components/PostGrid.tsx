@@ -8,6 +8,7 @@ interface Post {
   id: string;
   title: string;
   description: string;
+  onClick?: () => void;
 }
 
 interface PostGridProps {
@@ -34,6 +35,7 @@ const PostGrid: React.FC<PostGridProps> = ({ posts, categoryTitle }) => {
             <PostCard
               title={post.title}
               description={post.description}
+              onClick={post.onClick}
             />
           </Col>
         ))}
