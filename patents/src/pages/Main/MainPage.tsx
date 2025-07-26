@@ -15,9 +15,7 @@ const MainPage: React.FC = () => {
   ];
 
   return (
-    <div className="flex flex-col gap-4">
-      <PostGrid posts={patentPosts} categoryTitle="Патенты" />
-    </div>
+      <PostGrid posts={patentPosts}/>
   );
 };
 
