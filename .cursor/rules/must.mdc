@@ -1,0 +1,22 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+
+- use AntD components AS MUCH AS POSSIBLE (buttons, cards, typography, tags, form, etc)
+- if needed to positioning something use (ONLY FOR THIS) tailwindcss
+- NOT USE: inline styles, module css
+- in form: as placeholders put examples of real value (placeholder="100ms")
+- use const if needed
+- formulas should looks pretty (like in latex)
+- be responsive / adaptive (support mobile)
+- Break down the UI into smaller, single-responsibility components within the page's `components` directory:
+pages/
+└── [PageName]/
+    ├── components/
+    |   ├── ComponentA.tsx
+    |   └── ...
+    ├── [PageName]Page.tsx
+    ├── index.ts
+    └── utils.ts
