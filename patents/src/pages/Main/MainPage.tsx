@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import PostGrid from './components/PostGrid';
+import CombinedCalculator from './components/CombinedCalculator';
 
 const MainPage: React.FC = () => {
   const navigate = useNavigate();
@@ -21,7 +22,10 @@ const MainPage: React.FC = () => {
   ];
 
   return (
+    <div>
+      <CombinedCalculator />
       <PostGrid posts={patentPosts}/>
+    </div>
   );
 };
 
