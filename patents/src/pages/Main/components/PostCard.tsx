@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, Typography } from 'antd';
-import { useNavigate } from 'react-router-dom';
 
 const { Text } = Typography;
 

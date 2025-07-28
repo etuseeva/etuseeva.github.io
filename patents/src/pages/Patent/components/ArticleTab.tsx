@@ -82,7 +82,7 @@ const ArticleTab: React.FC = () => {
               'Ограниченная информативность существующих методов диагностики',
               'Недостаточный учет временных характеристик сердечного цикла'
             ]}
-            renderItem={(item, index) => <List.Item><Text>• </Text>{item}</List.Item>}
+            renderItem={item => <List.Item><Text>• </Text>{item}</List.Item>}
           />
         </div>
 
@@ -105,7 +105,7 @@ const ArticleTab: React.FC = () => {
               { title: 'Количественная оценка', description: 'определение процентного соотношения объемов крови' },
               { title: 'Неинвазивность', description: 'измерения проводятся без хирургического вмешательства' }
             ]}
-            renderItem={(item, index) => (
+            renderItem={item => (
               <List.Item>
                 <Text>• </Text><Text strong>{item.title}</Text> - {item.description}
               </List.Item>
@@ -222,7 +222,7 @@ const ArticleTab: React.FC = () => {
               { title: 'Прогнозирование', description: 'оценка риска развития сердечно-сосудистых осложнений' },
               { title: 'Дифференциальная диагностика', description: 'различение типов сердечной патологии' }
             ]}
-            renderItem={(item, index) => (
+            renderItem={item => (
               <List.Item>
                 <Text>• </Text><Text strong>{item.title}</Text> - {item.description}
               </List.Item>
