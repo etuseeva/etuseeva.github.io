@@ -1,9 +1,26 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { MathJaxContext } from 'better-react-mathjax';
 import PostGrid from './components/PostGrid';
+import CombinedCalculator from './components/CombinedCalculator';
 
 const MainPage: React.FC = () => {
   const navigate = useNavigate();
+
+  const config = {
+    loader: { load: ["[tex]/html"] },
+    tex: {
+      packages: { "[+]": ["html"] },
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      displayMath: [
+        ["$$", "$$"],
+        ["\\[", "\\]"]
+      ]
+    }
+  };
 
   const patentPosts = [
     {
@@ -21,7 +38,12 @@ const MainPage: React.FC = () => {
   ];
 
   return (
-      <PostGrid posts={patentPosts}/>
+    <MathJaxContext config={config}>
+      <div className="mx-auto p-6">
+        <CombinedCalculator />
+        <PostGrid posts={patentPosts} categoryTitle="ДОСТУПНЫЕ ПАТЕНТЫ" />
+      </div>
+    </MathJaxContext>
   );
 };
 

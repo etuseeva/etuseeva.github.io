@@ -1,7 +1,7 @@
 import React from 'react';
-import { Typography, Card, Form, Input, Button, Space, Alert, Divider, Row, Col } from 'antd';
+import { Typography, Card, Form, Input, Button, Divider, Row, Col } from 'antd';
 import { CalculatorOutlined, ReloadOutlined, ClearOutlined } from '@ant-design/icons';
-import { MathJax } from 'better-react-mathjax';
+import CardiacResultsDisplay from '../../../components/CardiacResultsDisplay';
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -43,27 +43,7 @@ const CalculatorTab: React.FC<CalculatorTabProps> = ({ onCalculate, results }) =
     form.resetFields();
   };
 
-  const getInterpretation = (Q1: number) => {
-    if (Q1 >= 62 && Q1 <= 72) {
-      return {
-        type: 'success' as const,
-        message: 'Нормальное функциональное состояние миокарда',
-        description: 'Результаты соответствуют норме (здоровые: Q₁≈67%, Q₂≈33%). Функция левого желудочка сердца в пределах нормальных значений.'
-      };
-    } else if (Q1 < 62) {
-      return {
-        type: 'error' as const,
-        message: 'Нарушение функции миокарда',
-        description: 'Снижение объема быстрого изгнания (патология: Q₁≈55%, Q₂≈45%) может указывать на нарушение сократительной функции миокарда. Рекомендуется консультация кардиолога.'
-      };
-    } else {
-      return {
-        type: 'warning' as const,
-        message: 'Возможные компенсаторные изменения',
-        description: 'Повышенный объем быстрого изгнания может указывать на компенсаторные изменения в работе миокарда. Требуется дополнительное обследование.'
-      };
-    }
-  };
+  // Using shared interpretation function from utils
 
   return (
     <Card>
@@ -178,44 +158,7 @@ const CalculatorTab: React.FC<CalculatorTabProps> = ({ onCalculate, results }) =
         <Col xs={24} lg={12}>
           <Card title="РЕЗУЛЬТАТЫ АНАЛИЗА">
             {results ? (
-              <Space direction="vertical" className="w-full">
-                <Alert
-                  message={getInterpretation(results.Q1).message}
-                  description={getInterpretation(results.Q1).description}
-                  type={getInterpretation(results.Q1).type}
-                  showIcon
-                />
-
-                <Card size="small" title="Распределение объема крови">
-                  <Row justify="center" gutter={[32, 0]}>
-                    <Col>
-                      <Title level={3} className="text-blue-500">
-                        <MathJax>{`$Q_1 = ${results.Q1.toFixed(1)}\\%$`}</MathJax>
-                      </Title>
-                      <Text type="secondary">Фаза быстрого изгнания</Text>
-                    </Col>
-                    <Col>
-                      <Title level={3} className="text-green-500">
-                        <MathJax>{`$Q_2 = ${results.Q2.toFixed(1)}\\%$`}</MathJax>
-                      </Title>
-                      <Text type="secondary">Фаза медленного изгнания</Text>
-                    </Col>
-                  </Row>
-                </Card>
-
-                <Card size="small" title="Расчетные параметры">
-                  <Row gutter={[16, 16]}>
-                    <Col span={12}>
-                      <Text type="secondary">Параметр ε:</Text>
-                      <div className="text-lg font-medium">{results.epsilon.toFixed(4)}</div>
-                    </Col>
-                    <Col span={12}>
-                      <Text type="secondary">Параметр ψ:</Text>
-                      <div className="text-lg font-medium">{results.psi.toFixed(4)}</div>
-                    </Col>
-                  </Row>
-                </Card>
-              </Space>
+              <CardiacResultsDisplay results={results} />
             ) : (
               <Typography.Text type="secondary">
                 Введите параметры измерения и нажмите "Произвести расчет"
