@@ -1,1 +1,0 @@
-export { default as Patent876105Page } from './Patent876105Page'; 

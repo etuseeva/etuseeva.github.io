@@ -1,14 +1,608 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
-    <script type="module" crossorigin src="/assets/index-CSkf2RxV.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-W8z6RJhF.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Лене 30!</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Marck+Script&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --pink: #f2a7c3;
+  --pink-light: #fef0f5;
+  --pink-hot: #ff6b9d;
+  --blue: #4a3adb;
+  --blue-light: #6c5ce7;
+  --blue-dark: #2d1f8e;
+  --silver: #c0c0c0;
+  --silver-light: #e8e8e8;
+  --white: #ffffff;
+  --text: #2a2040;
+  --text-light: #6b6088;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--pink-light);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* Sparkles */
+.sparkle-container {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.sparkle {
+  position: absolute;
+  border-radius: 50%;
+  animation: sparkle-float linear infinite;
+}
+
+.sparkle-star {
+  position: absolute;
+  animation: sparkle-float linear infinite;
+}
+
+.sparkle-star::before {
+  content: '✦';
+  font-size: inherit;
+  color: inherit;
+}
+
+@keyframes sparkle-float {
+  0% { transform: translateY(110vh) scale(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 0.8; }
+  100% { transform: translateY(-10vh) scale(1) rotate(360deg); opacity: 0; }
+}
+
+/* Page — single background, content floats as a ribbon */
+.page {
+  position: relative;
+  z-index: 1;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 0 60px 0;
+}
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 24px 80px;
+  text-align: center;
+}
+
+.hero-disco {
+  font-size: 44px;
+  margin-bottom: 4px;
+  animation: disco-spin 6s linear infinite;
+}
+
+@keyframes disco-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.hero-number {
+  font-family: 'Caveat', cursive;
+  font-size: 180px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 0 16px;
+  color: var(--pink-hot);
+  margin-bottom: 4px;
+}
+
+.hero-name {
+  font-family: 'Marck Script', cursive;
+  font-size: 36px;
+  color: var(--blue);
+  letter-spacing: 3px;
+  margin-bottom: 6px;
+}
+
+.hero-subtitle {
+  font-size: 15px;
+  color: var(--text-light);
+  margin-bottom: 28px;
+  letter-spacing: 1px;
+}
+
+.cake-emoji {
+  font-size: 90px;
+  margin: 8px auto 20px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.hero-date {
+  font-family: 'Caveat', cursive;
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--blue);
+  letter-spacing: 8px;
+}
+
+/* ===== WAVE CARD — a colored insert with wavy top & bottom ===== */
+.wave-card {
+  position: relative;
+  margin: 0 0 0 0;
+}
+
+.wave-card-top {
+  display: block;
+  width: 100%;
+  height: 35px;
+}
+
+.wave-card-body {
+  padding: 36px 28px;
+  text-align: center;
+}
+
+.wave-card-bottom {
+  display: block;
+  width: 100%;
+  height: 35px;
+}
+
+/* White cards */
+.wave-card--white .wave-card-body { background: var(--white); }
+
+/* Blue cards */
+.wave-card--blue .wave-card-body { background: var(--blue); }
+
+/* ===== Spacing between cards on the pink background ===== */
+.spacer {
+  height: 48px;
+}
+
+.spacer-sm {
+  height: 28px;
+}
+
+/* ===== INVITE ===== */
+.invite-text {
+  font-family: 'Marck Script', cursive;
+  font-size: 24px;
+  line-height: 1.5;
+  color: var(--blue);
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+.invite-subtext {
+  margin-top: 12px;
+  font-size: 15px;
+  color: var(--text-light);
+  font-weight: 300;
+}
+
+/* ===== LOCATION ===== */
+.section-title {
+  font-family: 'Caveat', cursive;
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 20px;
+}
+
+/* Inside a white card — location sub-card */
+.location-name {
+  font-family: 'Marck Script', cursive;
+  font-size: 28px;
+  color: var(--blue);
+  margin-bottom: 8px;
+}
+
+.location-detail {
+  font-size: 14px;
+  color: var(--text-light);
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.location-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 24px;
+  border-radius: 30px;
+  background: var(--blue);
+  color: var(--white);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.location-link:hover {
+  background: var(--blue-dark);
+  transform: translateY(-1px);
+}
+
+.parking-note {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+/* ===== CTA (blue card) ===== */
+.cta-title {
+  font-family: 'Marck Script', cursive;
+  font-size: 32px;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.cta-subtitle {
+  font-size: 14px;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 28px;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 16px 48px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--blue);
+  background: var(--white);
+  border: none;
+  border-radius: 40px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  background: var(--pink-light);
+  transform: translateY(-2px);
+}
+
+.cta-urgency {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--pink);
+}
+
+/* ===== TIMELINE ===== */
+.timeline {
+  max-width: 360px;
+  margin: 24px auto 0;
+  text-align: left;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1.5px dashed var(--silver-light);
+  align-items: flex-start;
+}
+
+.timeline-item:last-child { border-bottom: none; }
+
+.timeline-time {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--blue);
+  min-width: 52px;
+  flex-shrink: 0;
+}
+
+.timeline-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-light);
+  padding-top: 1px;
+}
+
+.timeline-desc strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.timeline-item.highlight {
+  background: rgba(74,58,219,0.04);
+  border-radius: 14px;
+  padding: 18px 14px;
+  margin: 4px -14px;
+  border-bottom: none;
+}
+
+.timeline-item.highlight .timeline-desc {
+  color: var(--blue);
+  font-weight: 500;
+}
+
+.pumpkin-badge {
+  display: inline-block;
+  background: var(--pink-hot);
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+/* ===== RULES ===== */
+.rules-grid {
+  max-width: 360px;
+  margin: 20px auto 0;
+  text-align: left;
+}
+
+.rule-item {
+  display: flex;
+  gap: 14px;
+  padding: 14px 16px;
+  align-items: center;
+  background: var(--pink-light);
+  border-radius: 14px;
+  margin-bottom: 10px;
+}
+
+.rule-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--silver-light);
+  border-radius: 10px;
+}
+
+.rule-text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-light);
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  padding: 48px 28px 20px;
+}
+
+.footer-heart {
+  font-size: 36px;
+  margin-bottom: 12px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.footer-text {
+  font-family: 'Marck Script', cursive;
+  font-size: 20px;
+  color: var(--blue);
+}
+
+/* Responsive */
+@media (max-width: 360px) {
+  .hero-number { font-size: 140px; }
+  .hero-name { font-size: 28px; }
+  .cake-emoji { font-size: 70px; }
+  .section-title { font-size: 28px; }
+}
+</style>
+</head>
+<body>
+
+<div class="sparkle-container" id="sparkles"></div>
+
+<div class="page">
+
+  <!-- ===== HERO (on pink bg) ===== -->
+  <section class="hero">
+    <div class="hero-disco">🪩</div>
+    <div class="hero-number">30</div>
+    <div class="hero-name">Лена</div>
+    <div class="hero-subtitle">да, мы тоже в шоке</div>
+    <div class="cake-emoji">🎂</div>
+    <div class="hero-date">06 · 06</div>
+  </section>
+
+
+  <!-- ===== INVITE (white wave-card) ===== -->
+  <div class="wave-card wave-card--white">
+    <svg class="wave-card-top" viewBox="0 0 480 35" preserveAspectRatio="none">
+      <path d="M0,35 Q60,0 120,20 Q180,35 240,15 Q300,0 360,20 Q420,35 480,10 L480,35 L0,35 Z" fill="#ffffff"/>
+    </svg>
+    <div class="wave-card-body">
+      <p class="invite-text">Если ты это читаешь — поздравляю, ты прошёл отбор</p>
+      <p class="invite-subtext">Приходи отметить, пока я ещё помню свои двадцатые</p>
+    </div>
+    <svg class="wave-card-bottom" viewBox="0 0 480 35" preserveAspectRatio="none">
+      <path d="M0,0 L480,0 L480,0 Q420,30 360,10 Q300,35 240,15 Q180,0 120,20 Q60,35 0,10 Z" fill="#ffffff"/>
+    </svg>
+  </div>
+
+
+  <div class="spacer"></div>
+
+
+  <!-- ===== LOCATION (white wave-card) ===== -->
+  <div class="wave-card wave-card--white">
+    <svg class="wave-card-top" viewBox="0 0 480 35" preserveAspectRatio="none">
+      <path d="M0,35 Q80,5 160,25 Q240,35 320,10 Q400,0 480,20 L480,35 L0,35 Z" fill="#ffffff"/>
+    </svg>
+    <div class="wave-card-body">
+      <div class="section-title">Когда и где</div>
+      <div class="location-name">Сфера</div>
+      <div class="location-detail">Суббота, 6 июня<br>Начало сбора в 15:00</div>
+      <a href="https://yandex.ru/maps/org/sfera/217186847091/?ll=45.923162%2C51.533411&z=16" target="_blank" class="location-link">📍 Открыть на карте</a>
+      <p class="parking-note">Есть большая парковка — приезжай на чём хочешь, главное приезжай</p>
+    </div>
+    <svg class="wave-card-bottom" viewBox="0 0 480 35" preserveAspectRatio="none">
+      <path d="M0,0 L480,0 Q400,35 320,15 Q240,0 160,25 Q80,35 0,10 Z" fill="#ffffff"/>
+    </svg>
+  </div>
+
+
+  <div class="spacer"></div>
+
+
+  <!-- ===== CTA (blue wave-card) ===== -->
+  <div class="wave-card wave-card--blue">
+    <svg class="wave-card-top" viewBox="0 0 480 35" preserveAspectRatio="none">
+      <path d="M0,35 Q60,5 140,22 Q220,35 300,12 Q380,0 480,25 L480,35 L0,35 Z" fill="#4a3adb"/>
+    </svg>
+    <div class="wave-card-body">
+      <div class="cta-title">Ну что, ты с нами?</div>
+      <p class="cta-subtitle">Мне надо знать, сколько торта заказывать</p>
+      <a href="https://forms.yandex.ru/u/69ea71894936397e84d0190d" target="_blank" class="cta-button">🍰 Хочу торт!</a>
+      <p class="cta-urgency">Чем быстрее — тем лучше ✨</p>
+    </div>
+    <svg class="wave-card-bottom" viewBox="0 0 480 35" preserveAspectRatio="none">
+      <path d="M0,0 L480,0 Q380,35 300,12 Q220,0 140,25 Q60,35 0,8 Z" fill="#4a3adb"/>
+    </svg>
+  </div>
+
+
+  <div class="spacer"></div>
+
+
+  <!-- ===== TIMELINE (white wave-card) ===== -->
+  <div class="wave-card wave-card--white">
+    <svg class="wave-card-top" viewBox="0 0 480 35" preserveAspectRatio="none">
+      <path d="M0,35 Q80,0 160,20 Q240,35 320,8 Q400,0 480,22 L480,35 L0,35 Z" fill="#ffffff"/>
+    </svg>
+    <div class="wave-card-body">
+      <div class="section-title">Программа дня</div>
+      <p style="margin-bottom: 8px; font-size: 15px; color: var(--text-light);">Диджей, фотозона, торт и всё что любим</p>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-time">15:00</div>
+          <div class="timeline-desc"><strong>Сбор гостей.</strong> Обнимашки. Фотозона. Первые бокалы.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">16:00</div>
+          <div class="timeline-desc"><strong>Поехали!</strong> Ведущий, банкет, всё серьёзно.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">18:00</div>
+          <div class="timeline-desc"><strong>Танцы.</strong> Диджей поможет даже тем, кто «не танцует».</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">21:00</div>
+          <div class="timeline-desc"><strong>Торт + тихий режим.</strong> Площадка на природе, переходим на шёпот (ну почти).</div>
+        </div>
+        <div class="timeline-item highlight">
+          <div class="timeline-time">22:30</div>
+          <div class="timeline-desc">
+            <strong>Тыква-тайм</strong> <span class="pumpkin-badge">финал</span><br>
+            Карета превращается в такси. Закажи заранее!
+          </div>
+        </div>
+      </div>
+    </div>
+    <svg class="wave-card-bottom" viewBox="0 0 480 35" preserveAspectRatio="none">
+      <path d="M0,0 L480,0 Q400,30 320,10 Q240,35 160,15 Q80,0 0,25 Z" fill="#ffffff"/>
+    </svg>
+  </div>
+
+
+  <div class="spacer"></div>
+
+
+  <!-- ===== RULES (white wave-card) ===== -->
+  <div class="wave-card wave-card--white">
+    <svg class="wave-card-top" viewBox="0 0 480 35" preserveAspectRatio="none">
+      <path d="M0,35 Q60,10 140,28 Q220,35 300,8 Q380,0 480,18 L480,35 L0,35 Z" fill="#ffffff"/>
+    </svg>
+    <div class="wave-card-body">
+      <div class="section-title">Чтобы нас не выгнали раньше торта</div>
+      <div class="rules-grid">
+        <div class="rule-item">
+          <div class="rule-icon">👠</div>
+          <div class="rule-text">Шпильки и газон — враги. Каблуки лучше оставить для танцпола.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon">🚬</div>
+          <div class="rule-text">Бычки в пепельницы. Мы же не варвары.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon">🤫</div>
+          <div class="rule-text">После 21:00 — режим «библиотечной дискотеки». Частная территория, соседи спят.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon">🚕</div>
+          <div class="rule-text">В 22:30 прощаемся. В 23:00 нужно уехать — закажи такси заранее!</div>
+        </div>
+      </div>
+    </div>
+    <svg class="wave-card-bottom" viewBox="0 0 480 35" preserveAspectRatio="none">
+      <path d="M0,0 L480,0 Q380,30 300,10 Q220,35 140,12 Q60,0 0,22 Z" fill="#ffffff"/>
+    </svg>
+  </div>
+
+
+  <!-- ===== FOOTER (on pink bg) ===== -->
+  <section class="footer">
+    <div class="footer-heart">💖</div>
+    <p class="footer-text">Жду тебя. Будет красиво.</p>
+  </section>
+
+</div>
+
+<script>
+const container = document.getElementById('sparkles');
+
+for (let i = 0; i < 20; i++) {
+  const star = document.createElement('div');
+  star.classList.add('sparkle-star');
+  star.style.left = Math.random() * 100 + '%';
+  star.style.animationDuration = (8 + Math.random() * 12) + 's';
+  star.style.animationDelay = Math.random() * 12 + 's';
+  star.style.fontSize = (10 + Math.random() * 8) + 'px';
+  const colors = [
+    'rgba(192,192,192,0.5)',
+    'rgba(248,164,200,0.4)',
+    'rgba(108,92,231,0.3)',
+    'rgba(255,255,255,0.6)',
+  ];
+  star.style.color = colors[Math.floor(Math.random() * colors.length)];
+  container.appendChild(star);
+}
+
+for (let i = 0; i < 12; i++) {
+  const dot = document.createElement('div');
+  dot.classList.add('sparkle');
+  dot.style.left = Math.random() * 100 + '%';
+  dot.style.animationDuration = (7 + Math.random() * 10) + 's';
+  dot.style.animationDelay = Math.random() * 10 + 's';
+  const size = (2 + Math.random() * 4) + 'px';
+  dot.style.width = size;
+  dot.style.height = size;
+  dot.style.background = 'radial-gradient(circle, rgba(192,192,192,0.7) 0%, transparent 70%)';
+  container.appendChild(dot);
+}
+</script>
+
+</body>
 </html>
